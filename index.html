@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bé Học Số & Chữ</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .screen {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* ==================== MÀN HÌNH MENU CHÍNH ==================== */
+    #menu-screen {
+      justify-content: center;
+      gap: 28px;
+    }
+
+    .menu-header {
+      text-align: center;
+    }
+
+    .menu-title {
+      font-size: 36px;
+      font-weight: 900;
+      color: #FF4757;
+      text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(0,0,0,0.08);
+      margin-bottom: 8px;
+    }
+
+    .menu-subtitle {
+      font-size: 18px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .menu-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .category-card {
+      background: #fff;
+      border-radius: 30px;
+      padding: 24px 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+      border: 6px solid #fff;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .category-card:active {
+      transform: scale(0.95);
+    }
+
+    .card-num {
+      background: linear-gradient(135deg, #FF9F43 0%, #FF5E7E 100%);
+      color: white;
+    }
+
+    .card-let {
+      background: linear-gradient(135deg, #1E90FF 0%, #2ED573 100%);
+      color: white;
+    }
+
+    .category-icon {
+      font-size: 54px;
+      background: rgba(255,255,255,0.25);
+      width: 85px;
+      height: 85px;
+      border-radius: 22px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .category-info h2 {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .category-info p {
+      font-size: 15px;
+      opacity: 0.9;
+      font-weight: 600;
+    }
+
+    /* ==================== MÀN HÌNH CHƠI GAME ==================== */
+    .top-bar {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      z-index: 10;
+    }
+
+    .pill-btn {
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid #fff;
+      border-radius: 20px;
+      padding: 8px 12px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    .pill-btn:active {
+      transform: scale(0.95);
+    }
+
+    .score-badge {
+      background: #FFD700;
+      color: #5C4000;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-weight: 800;
+      font-size: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .card-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .display-card {
+      background: #ffffff;
+      width: 260px;
+      height: 260px;
+      border-radius: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+      border: 8px solid #fff;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .display-card.pop {
+      transform: scale(1.15) rotate(3deg);
+    }
+
+    #target-char {
+      font-size: 125px;
+      font-weight: 900;
+      line-height: 1.05;
+      color: #FF5E7E;
+      text-shadow: 3px 3px 0px rgba(0,0,0,0.06);
+    }
+
+    #char-word {
+      font-size: 22px;
+      font-weight: 700;
+      color: #777;
+      margin-top: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .feedback-box {
+      margin-top: 22px;
+      min-height: 44px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px 22px;
+      border-radius: 25px;
+      font-size: 17px;
+      font-weight: 600;
+      color: #444;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .controls {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      padding-bottom: 12px;
+      z-index: 10;
+    }
+
+    .action-btn {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: none;
+      background: #fff;
+      font-size: 28px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      cursor: pointer;
+    }
+
+    .mic-btn {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      background: #FF5E7E;
+      color: white;
+      font-size: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 10px 25px rgba(255, 94, 126, 0.45);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mic-btn.listening {
+      background: #2ED573;
+      box-shadow: 0 0 0 12px rgba(46, 213, 115, 0.25);
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 99;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ==================== 1. MÀN HÌNH MENU CHÍNH ==================== -->
+  <div id="menu-screen" class="screen">
+    <div class="menu-header">
+      <div class="menu-title">BÉ VUI HỌC</div>
+      <div class="menu-subtitle">Chọn bài học cùng bé nhé!</div>
+    </div>
+
+    <div class="menu-cards">
+      <div class="category-card card-num" onclick="startGame('numbers')">
+        <div class="category-icon">123</div>
+        <div class="category-info">
+          <h2>Học Số</h2>
+          <p>Đọc các con số từ 0 đến 20</p>
+        </div>
+      </div>
+
+      <div class="category-card card-let" onclick="startGame('letters')">
+        <div class="category-icon">ABC</div>
+        <div class="category-info">
+          <h2>Học Chữ</h2>
+          <p>Đọc bảng chữ cái A, B, C</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="pill-btn" id="menu-lang-btn" onclick="toggleLang()" style="padding: 10px 20px; font-size: 16px;">
+      Ngôn ngữ: 🇻🇳 Tiếng Việt
+    </button>
+  </div>
+
+  <!-- ==================== 2. MÀN HÌNH HỌC (SỐ / CHỮ) ==================== -->
+  <div id="game-screen" class="screen hidden">
+    <div class="top-bar">
+      <button class="pill-btn" onclick="goHome()">🏠 Menu</button>
+      <button class="pill-btn" id="lang-btn" onclick="toggleLang()">🇻🇳 Tiếng Việt</button>
+      <button class="pill-btn" id="mode-btn" onclick="toggleOrderMode()">Tuần tự</button>
+      <div class="score-badge">⭐ <span id="score">0</span></div>
+    </div>
+
+    <div class="card-container">
+      <div class="display-card" id="display-card">
+        <div id="target-char">1</div>
+        <div id="char-word">MỘT</div>
+      </div>
+      <div class="feedback-box" id="feedback">Bấm Micro và đọc to nhé!</div>
+    </div>
+
+    <div class="controls">
+      <button class="action-btn" onclick="speakCurrentItem()" title="Nghe đọc mẫu">🔊</button>
+      <button class="mic-btn" id="mic-btn" onclick="toggleListening()" title="Bấm để nói">🎤</button>
+      <button class="action-btn" onclick="nextItem(false)" title="Tiếp theo">⏭️</button>
+    </div>
+  </div>
+
+  <script>
+    // ==================== DỮ LIỆU SỐ (0 - 20) ====================
+    const NUMBERS_DATA = [
+      { char: "0", vi: ["không", "số không", "0"], en: ["zero", "oh", "0"], labelVi: "KHÔNG", labelEn: "ZERO" },
+      { char: "1", vi: ["một", "số một", "mốt", "1"], en: ["one", "won", "1"], labelVi: "MỘT", labelEn: "ONE" },
+      { char: "2", vi: ["hai", "số hai", "2"], en: ["two", "to", "too", "2"], labelVi: "HAI", labelEn: "TWO" },
+      { char: "3", vi: ["ba", "số ba", "3"], en: ["three", "tree", "free", "3"], labelVi: "BA", labelEn: "THREE" },
+      { char: "4", vi: ["bốn", "số bốn", "tư", "4"], en: ["four", "for", "4"], labelVi: "BỐN", labelEn: "FOUR" },
+      { char: "5", vi: ["năm", "số năm", "lăm", "5"], en: ["five", "5"], labelVi: "NĂM", labelEn: "FIVE" },
+      { char: "6", vi: ["sáu", "số sáu", "xấu", "6"], en: ["six", "6"], labelVi: "SÁU", labelEn: "SIX" },
+      { char: "7", vi: ["bảy", "số bảy", "bẩy", "7"], en: ["seven", "7"], labelVi: "BẢY", labelEn: "SEVEN" },
+      { char: "8", vi: ["tám", "số tám", "8"], en: ["eight", "ate", "8"], labelVi: "TÁM", labelEn: "EIGHT" },
+      { char: "9", vi: ["chín", "số chín", "9"], en: ["nine", "9"], labelVi: "CHÍN", labelEn: "NINE" },
+      { char: "10", vi: ["mười", "số mười", "10"], en: ["ten", "10"], labelVi: "MƯỜI", labelEn: "TEN" },
+      { char: "11", vi: ["mười một", "11"], en: ["eleven", "11"], labelVi: "MƯỜI MỘT", labelEn: "ELEVEN" },
+      { char: "12", vi: ["mười hai", "12"], en: ["twelve", "12"], labelVi: "MƯỜI HAI", labelEn: "TWELVE" },
+      { char: "13", vi: ["mười ba", "13"], en: ["thirteen", "13"], labelVi: "MƯỜI BA", labelEn: "THIRTEEN" },
+      { char: "14", vi: ["mười bốn", "14"], en: ["fourteen", "14"], labelVi: "MƯỜI BỐN", labelEn: "FOURTEEN" },
+      { char: "15", vi: ["mười lăm", "mười năm", "15"], en: ["fifteen", "15"], labelVi: "MƯỜI LĂM", labelEn: "FIFTEEN" },
+      { char: "16", vi: ["mười sáu", "16"], en: ["sixteen", "16"], labelVi: "MƯỜI SÁU", labelEn: "SIXTEEN" },
+      { char: "17", vi: ["mười bảy", "17"], en: ["seventeen", "17"], labelVi: "MƯỜI BẢY", labelEn: "SEVENTEEN" },
+      { char: "18", vi: ["mười tám", "18"], en: ["eighteen", "18"], labelVi: "MƯỜI TÁM", labelEn: "EIGHTEEN" },
+      { char: "19", vi: ["mười chín", "19"], en: ["nineteen", "19"], labelVi: "MƯỜI CHÍN", labelEn: "NINETEEN" },
+      { char: "20", vi: ["hai mươi", "20"], en: ["twenty", "20"], labelVi: "HAI MƯƠI", labelEn: "TWENTY" }
+    ];
+
+    // ==================== DỮ LIỆU CHỮ CÁI TIẾNG VIỆT (29 CHỮ) ====================
+    const LETTERS_VI = [
+      { char: "A", accept: ["a", "chữ a", "ha"], label: "A", speak: "a" },
+      { char: "Ă", accept: ["ă", "á", "chữ á", "chữ ă"], label: "Á", speak: "á" },
+      { char: "Â", accept: ["â", "ớ", "chữ ớ", "chữ â"], label: "Ớ", speak: "ớ" },
+      { char: "B", accept: ["b", "bờ", "bê", "chữ b", "chữ bờ", "chữ bê", "bố", "ba"], label: "BỜ / BÊ", speak: "bờ" },
+      { char: "C", accept: ["c", "cờ", "xê", "chữ c", "chữ cờ", "chữ xê", "cá"], label: "CỜ / XÊ", speak: "cờ" },
+      { char: "D", accept: ["d", "dờ", "dê", "chữ d", "chữ dờ", "chữ dê"], label: "DỜ / DÊ", speak: "dờ" },
+      { char: "Đ", accept: ["đ", "đờ", "đê", "chữ đ", "chữ đờ", "chữ đê"], label: "ĐỜ / ĐÊ", speak: "đờ" },
+      { char: "E", accept: ["e", "chữ e", "em"], label: "E", speak: "e" },
+      { char: "Ê", accept: ["ê", "chữ ê"], label: "Ê", speak: "ê" },
+      { char: "G", accept: ["g", "gờ", "giê", "chữ g", "chữ gờ", "gà"], label: "GỜ", speak: "gờ" },
+      { char: "H", accept: ["h", "hờ", "hắt", "chữ h", "chữ hờ", "chữ hắt"], label: "HỜ / HẮT", speak: "hờ" },
+      { char: "I", accept: ["i", "y", "i ngắn", "chữ i"], label: "I (NGẮN)", speak: "i" },
+      { char: "K", accept: ["k", "ca", "ka", "cờ", "chữ k", "chữ ca"], label: "CA", speak: "ca" },
+      { char: "L", accept: ["l", "lờ", "e lờ", "chữ l", "chữ lờ"], label: "LỜ", speak: "lờ" },
+      { char: "M", accept: ["m", "mờ", "em mờ", "chữ m", "chữ mờ", "mẹ"], label: "MỜ", speak: "mờ" },
+      { char: "N", accept: ["n", "nờ", "en nờ", "chữ n", "chữ nờ"], label: "NỜ", speak: "nờ" },
+      { char: "O", accept: ["o", "chữ o", "ò"], label: "O", speak: "o" },
+      { char: "Ô", accept: ["ô", "chữ ô"], label: "Ô", speak: "ô" },
+      { char: "Ơ", accept: ["ơ", "chữ ơ"], label: "Ơ", speak: "ơ" },
+      { char: "P", accept: ["p", "pờ", "pê", "bê", "chữ p", "chữ pờ"], label: "PỜ / PÊ", speak: "pờ" },
+      { char: "Q", accept: ["q", "quờ", "quy", "cu", "chữ q", "chữ quy"], label: "QUỜ / QUY", speak: "quy" },
+      { char: "R", accept: ["r", "rờ", "e rờ", "chữ r", "chữ rờ"], label: "RỜ", speak: "rờ" },
+      { char: "S", accept: ["s", "sờ", "ét sờ", "xờ", "chữ s", "chữ sờ"], label: "SỜ", speak: "sờ" },
+      { char: "T", accept: ["t", "tờ", "tê", "chữ t", "chữ tờ", "chữ tê"], label: "TỜ / TÊ", speak: "tờ" },
+      { char: "U", accept: ["u", "chữ u"], label: "U", speak: "u" },
+      { char: "Ư", accept: ["ư", "chữ ư"], label: "Ư", speak: "ư" },
+      { char: "V", accept: ["v", "vờ", "vê", "chữ v", "chữ vờ", "chữ vê"], label: "VỜ / VÊ", speak: "vờ" },
+      { char: "X", accept: ["x", "xờ", "ích xì", "sờ", "chữ x", "chữ xờ"], label: "XỜ", speak: "xờ" },
+      { char: "Y", accept: ["y", "i dài", "y dài", "i", "chữ y"], label: "Y (DÀI)", speak: "y dài" }
+    ];
+
+    // ==================== DỮ LIỆU CHỮ CÁI TIẾNG ANH (A - Z) ====================
+    const LETTERS_EN = [
+      { char: "A", accept: ["a", "ay", "hey"], label: "AY", speak: "a" },
+      { char: "B", accept: ["b", "bee", "be"], label: "BEE", speak: "b" },
+      { char: "C", accept: ["c", "see", "sea"], label: "CEE", speak: "c" },
+      { char: "D", accept: ["d", "dee"], label: "DEE", speak: "d" },
+      { char: "E", accept: ["e", "ee", "he"], label: "EE", speak: "e" },
+      { char: "F", accept: ["f", "ef"], label: "EF", speak: "f" },
+      { char: "G", accept: ["g", "gee"], label: "GEE", speak: "g" },
+      { char: "H", accept: ["h", "aitch", "age"], label: "AITCH", speak: "h" },
+      { char: "I", accept: ["i", "eye", "hi"], label: "EYE", speak: "i" },
+      { char: "J", accept: ["j", "jay"], label: "JAY", speak: "j" },
+      { char: "K", accept: ["k", "kay", "okay"], label: "KAY", speak: "k" },
+      { char: "L", accept: ["l", "el"], label: "EL", speak: "l" },
+      { char: "M", accept: ["m", "em", "am"], label: "EM", speak: "m" },
+      { char: "N", accept: ["n", "en", "and", "in"], label: "EN", speak: "n" },
+      { char: "O", accept: ["o", "oh"], label: "OH", speak: "o" },
+      { char: "P", accept: ["p", "pee", "pea"], label: "PEE", speak: "p" },
+      { char: "Q", accept: ["q", "cue", "queue", "you"], label: "CUE", speak: "q" },
+      { char: "R", accept: ["r", "ar", "are"], label: "AR", speak: "r" },
+      { char: "S", accept: ["s", "ess", "yes"], label: "ESS", speak: "s" },
+      { char: "T", accept: ["t", "tee", "tea"], label: "TEE", speak: "t" },
+      { char: "U", accept: ["u", "you"], label: "YOU", speak: "u" },
+      { char: "V", accept: ["v", "vee", "we"], label: "VEE", speak: "v" },
+      { char: "W", accept: ["w", "double u", "double you"], label: "DOUBLE-U", speak: "w" },
+      { char: "X", accept: ["x", "ex"], label: "EX", speak: "x" },
+      { char: "Y", accept: ["y", "why"], label: "WHY", speak: "y" },
+      { char: "Z", accept: ["z", "zee", "zed"], label: "ZEE", speak: "z" }
+    ];
+
+    const COLORS = ["#FF5E7E", "#FF9F43", "#2ED573", "#1E90FF", "#A55EEA", "#FF4757", "#00D2D3"];
+
+    let currentCategory = 'numbers'; // 'numbers' hoặc 'letters'
+    let currentLang = 'vi';          // 'vi' hoặc 'en'
+    let isRandomOrder = false;       // false: Tuần tự, true: Ngẫu nhiên
+    let currentIndex = 0;
+    let score = 0;
+    let isListening = false;
+    let autoContinue = false;
+
+    // Lấy danh sách dữ liệu hiện tại tùy theo chế độ Số hay Chữ
+    function getActiveList() {
+      if (currentCategory === 'numbers') return NUMBERS_DATA;
+      return currentLang === 'vi' ? LETTERS_VI : LETTERS_EN;
+    }
+
+    // Điều hướng từ Menu vào bài học
+    function startGame(category) {
+      currentCategory = category;
+      currentIndex = category === 'numbers' ? 1 : 0; // Số bắt đầu từ 1, Chữ bắt đầu từ A
+      document.getElementById('menu-screen').classList.add('hidden');
+      document.getElementById('game-screen').classList.remove('hidden');
+      renderCard();
+      updateFeedback(currentLang === 'vi' ? "Bấm Micro và đọc to nhé!" : "Tap Mic and read aloud!");
+    }
+
+    // Quay về Menu chính
+    function goHome() {
+      autoContinue = false;
+      if (recognition && isListening) {
+        recognition.stop();
+      }
+      document.getElementById('game-screen').classList.add('hidden');
+      document.getElementById('menu-screen').classList.remove('hidden');
+    }
+
+    // Khởi tạo nhận diện giọng nói
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition = null;
+
+    if (SpeechRecognition) {
+      recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = true;
+
+      recognition.onstart = () => {
+        isListening = true;
+        document.getElementById('mic-btn').classList.add('listening');
+        updateFeedback(currentLang === 'vi' ? "Đang nghe bé đọc..." : "Listening...");
+      };
+
+      recognition.onresult = (event) => {
+        let transcript = "";
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        transcript = transcript.toLowerCase().trim();
+        updateFeedback(`🗣️ "${transcript}"`);
+
+        if (checkAnswer(transcript)) {
+          recognition.stop();
+          handleCorrectAnswer();
+        }
+      };
+
+      recognition.onerror = (event) => {
+        if (event.error === 'no-speech') {
+          updateFeedback(currentLang === 'vi' ? "Chưa nghe rõ, bé đọc to hơn nhé!" : "Speak louder please!");
+        } else if (event.error === 'not-allowed') {
+          updateFeedback("⚠️ Vui lòng cấp quyền Micro cho ứng dụng!");
+          autoContinue = false;
+        }
+      };
+
+      recognition.onend = () => {
+        isListening = false;
+        document.getElementById('mic-btn').classList.remove('listening');
+        if (autoContinue) {
+          setTimeout(() => {
+            if (!isListening && autoContinue) {
+              try { recognition.start(); } catch(e) {}
+            }
+          }, 600);
+        }
+      };
+    }
+
+    function checkAnswer(spokenText) {
+      const list = getActiveList();
+      const item = list[currentIndex];
+      const validWords = currentCategory === 'numbers'
+        ? (currentLang === 'vi' ? item.vi : item.en)
+        : item.accept;
+
+      return validWords.some(word => {
+        const regex = new RegExp(`(^|\\s)${word}($|\\s|[.,!?])`, 'i');
+        return regex.test(spokenText) || spokenText === word;
+      });
+    }
+
+    function handleCorrectAnswer() {
+      autoContinue = false;
+      score += 10;
+      document.getElementById('score').innerText = score;
+
+      const card = document.getElementById('display-card');
+      card.classList.add('pop');
+      playSuccessSound();
+      fireConfetti();
+
+      updateFeedback(currentLang === 'vi' ? "🎉 Giỏi quá! Chính xác!" : "🎉 Awesome! Correct!");
+
+      setTimeout(() => {
+        card.classList.remove('pop');
+        nextItem(true);
+        autoContinue = true;
+        try { recognition.start(); } catch(e) {}
+      }, 1500);
+    }
+
+    function nextItem(fromCorrect) {
+      const list = getActiveList();
+      if (!isRandomOrder) {
+        currentIndex = (currentIndex + 1) % list.length;
+      } else {
+        let next;
+        do { next = Math.floor(Math.random() * list.length); } while (next === currentIndex && list.length > 1);
+        currentIndex = next;
+      }
+      renderCard();
+      if (!fromCorrect) {
+        updateFeedback(currentLang === 'vi' ? "Bé đọc thẻ mới này nhé!" : "Read this one!");
+      }
+    }
+
+    function renderCard() {
+      const list = getActiveList();
+      if (currentIndex >= list.length) currentIndex = 0;
+      const item = list[currentIndex];
+
+      const charEl = document.getElementById('target-char');
+      const wordEl = document.getElementById('char-word');
+
+      charEl.innerText = item.char;
+      charEl.style.color = COLORS[currentIndex % COLORS.length];
+
+      if (currentCategory === 'numbers') {
+        wordEl.innerText = currentLang === 'vi' ? item.labelVi : item.labelEn;
+      } else {
+        wordEl.innerText = item.label;
+      }
+    }
+
+    function toggleListening() {
+      if (!recognition) {
+        updateFeedback("⚠️ Thiết bị chưa hỗ trợ nhận diện giọng nói.");
+        return;
+      }
+      if (isListening) {
+        autoContinue = false;
+        recognition.stop();
+        updateFeedback(currentLang === 'vi' ? "Đã tạm dừng Micro" : "Mic paused");
+      } else {
+        autoContinue = true;
+        recognition.lang = currentLang === 'vi' ? 'vi-VN' : 'en-US';
+        try { recognition.start(); } catch(e) {}
+      }
+    }
+
+    function toggleLang() {
+      currentLang = currentLang === 'vi' ? 'en' : 'vi';
+      const label = currentLang === 'vi' ? '🇻🇳 Tiếng Việt' : '🇺🇸 English';
+      document.getElementById('lang-btn').innerText = label;
+      document.getElementById('menu-lang-btn').innerText = "Ngôn ngữ: " + label;
+      currentIndex = currentCategory === 'numbers' ? 1 : 0;
+      renderCard();
+      if (recognition) {
+        recognition.lang = currentLang === 'vi' ? 'vi-VN' : 'en-US';
+        if (isListening) recognition.stop();
+      }
+    }
+
+    function toggleOrderMode() {
+      isRandomOrder = !isRandomOrder;
+      document.getElementById('mode-btn').innerText = isRandomOrder ? "Ngẫu nhiên" : "Tuần tự";
+    }
+
+    function speakCurrentItem() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const list = getActiveList();
+        const item = list[currentIndex];
+        let textToSpeak = "";
+
+        if (currentCategory === 'numbers') {
+          textToSpeak = currentLang === 'vi' ? item.labelVi.toLowerCase() : item.labelEn.toLowerCase();
+        } else {
+          textToSpeak = item.speak;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.lang = currentLang === 'vi' ? 'vi-VN' : 'en-US';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    function updateFeedback(text) {
+      document.getElementById('feedback').innerText = text;
+    }
+
+    function playSuccessSound() {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.08);
+        gain.gain.setValueAtTime(0.2, ctx.currentTime + idx * 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.08 + 0.3);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime + idx * 0.08);
+        osc.stop(ctx.currentTime + idx * 0.08 + 0.3);
+      });
+    }
+
+    const canvas = document.getElementById('confetti-canvas');
+    const cCtx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function fireConfetti() {
+      for (let i = 0; i < 60; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          vx: (Math.random() - 0.5) * 16,
+          vy: (Math.random() - 0.7) * 16,
+          size: Math.random() * 8 + 4,
+          color: COLORS[Math.floor(Math.random() * COLORS.length)],
+          alpha: 1
+        });
+      }
+    }
+
+    function animateConfetti() {
+      cCtx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.4;
+        p.alpha -= 0.015;
+        cCtx.globalAlpha = Math.max(0, p.alpha);
+        cCtx.fillStyle = p.color;
+        cCtx.fillRect(p.x, p.y, p.size, p.size);
+        if (p.alpha <= 0) particles.splice(i, 1);
+      });
+      requestAnimationFrame(animateConfetti);
+    }
+    animateConfetti();
+  </script>
+</body>
+</html>
