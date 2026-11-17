@@ -300,7 +300,7 @@
         <div class="category-icon">123</div>
         <div class="category-info">
           <h2>Học Số</h2>
-          <p>Đọc các con số từ 0 đến 20</p>
+          <p>Đọc các con số từ 0 đến 10</p>
         </div>
       </div>
 
@@ -329,8 +329,8 @@
 
     <div class="card-container">
       <div class="display-card" id="display-card">
-        <div id="target-char">1</div>
-        <div id="char-word">MỘT</div>
+        <div id="target-char">0</div>
+        <div id="char-word">KHÔNG</div>
       </div>
       <div class="feedback-box" id="feedback">Bấm Micro và đọc to nhé!</div>
     </div>
@@ -343,7 +343,7 @@
   </div>
 
   <script>
-    // ==================== DỮ LIỆU SỐ (0 - 20) ====================
+    // ==================== DỮ LIỆU SỐ (0 - 10) ====================
     const NUMBERS_DATA = [
       { char: "0", vi: ["không", "số không", "0"], en: ["zero", "oh", "0"], labelVi: "KHÔNG", labelEn: "ZERO" },
       { char: "1", vi: ["một", "số một", "mốt", "1"], en: ["one", "won", "1"], labelVi: "MỘT", labelEn: "ONE" },
@@ -355,17 +355,7 @@
       { char: "7", vi: ["bảy", "số bảy", "bẩy", "7"], en: ["seven", "7"], labelVi: "BẢY", labelEn: "SEVEN" },
       { char: "8", vi: ["tám", "số tám", "8"], en: ["eight", "ate", "8"], labelVi: "TÁM", labelEn: "EIGHT" },
       { char: "9", vi: ["chín", "số chín", "9"], en: ["nine", "9"], labelVi: "CHÍN", labelEn: "NINE" },
-      { char: "10", vi: ["mười", "số mười", "10"], en: ["ten", "10"], labelVi: "MƯỜI", labelEn: "TEN" },
-      { char: "11", vi: ["mười một", "11"], en: ["eleven", "11"], labelVi: "MƯỜI MỘT", labelEn: "ELEVEN" },
-      { char: "12", vi: ["mười hai", "12"], en: ["twelve", "12"], labelVi: "MƯỜI HAI", labelEn: "TWELVE" },
-      { char: "13", vi: ["mười ba", "13"], en: ["thirteen", "13"], labelVi: "MƯỜI BA", labelEn: "THIRTEEN" },
-      { char: "14", vi: ["mười bốn", "14"], en: ["fourteen", "14"], labelVi: "MƯỜI BỐN", labelEn: "FOURTEEN" },
-      { char: "15", vi: ["mười lăm", "mười năm", "15"], en: ["fifteen", "15"], labelVi: "MƯỜI LĂM", labelEn: "FIFTEEN" },
-      { char: "16", vi: ["mười sáu", "16"], en: ["sixteen", "16"], labelVi: "MƯỜI SÁU", labelEn: "SIXTEEN" },
-      { char: "17", vi: ["mười bảy", "17"], en: ["seventeen", "17"], labelVi: "MƯỜI BẢY", labelEn: "SEVENTEEN" },
-      { char: "18", vi: ["mười tám", "18"], en: ["eighteen", "18"], labelVi: "MƯỜI TÁM", labelEn: "EIGHTEEN" },
-      { char: "19", vi: ["mười chín", "19"], en: ["nineteen", "19"], labelVi: "MƯỜI CHÍN", labelEn: "NINETEEN" },
-      { char: "20", vi: ["hai mươi", "20"], en: ["twenty", "20"], labelVi: "HAI MƯƠI", labelEn: "TWENTY" }
+      { char: "10", vi: ["mười", "số mười", "10"], en: ["ten", "10"], labelVi: "MƯỜI", labelEn: "TEN" }
     ];
 
     // ==================== DỮ LIỆU CHỮ CÁI TIẾNG VIỆT (29 CHỮ) ====================
@@ -441,23 +431,20 @@
     let isListening = false;
     let autoContinue = false;
 
-    // Lấy danh sách dữ liệu hiện tại tùy theo chế độ Số hay Chữ
     function getActiveList() {
       if (currentCategory === 'numbers') return NUMBERS_DATA;
       return currentLang === 'vi' ? LETTERS_VI : LETTERS_EN;
     }
 
-    // Điều hướng từ Menu vào bài học
     function startGame(category) {
       currentCategory = category;
-      currentIndex = category === 'numbers' ? 1 : 0; // Số bắt đầu từ 1, Chữ bắt đầu từ A
+      currentIndex = 0; // Bắt đầu từ số 0 (hoặc chữ A)
       document.getElementById('menu-screen').classList.add('hidden');
       document.getElementById('game-screen').classList.remove('hidden');
       renderCard();
       updateFeedback(currentLang === 'vi' ? "Bấm Micro và đọc to nhé!" : "Tap Mic and read aloud!");
     }
 
-    // Quay về Menu chính
     function goHome() {
       autoContinue = false;
       if (recognition && isListening) {
@@ -467,7 +454,6 @@
       document.getElementById('menu-screen').classList.remove('hidden');
     }
 
-    // Khởi tạo nhận diện giọng nói
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     let recognition = null;
 
@@ -605,7 +591,7 @@
       const label = currentLang === 'vi' ? '🇻🇳 Tiếng Việt' : '🇺🇸 English';
       document.getElementById('lang-btn').innerText = label;
       document.getElementById('menu-lang-btn').innerText = "Ngôn ngữ: " + label;
-      currentIndex = currentCategory === 'numbers' ? 1 : 0;
+      currentIndex = 0;
       renderCard();
       if (recognition) {
         recognition.lang = currentLang === 'vi' ? 'vi-VN' : 'en-US';
