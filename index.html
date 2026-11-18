@@ -9,7 +9,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      touch-action: manipulation;
+      touch-action: none;
       user-select: none;
       -webkit-user-select: none;
     }
@@ -33,7 +33,7 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      padding: 16px;
+      padding: 14px;
     }
 
     .hidden {
@@ -43,7 +43,7 @@
     /* ==================== MÀN HÌNH MENU CHÍNH ==================== */
     #menu-screen {
       justify-content: center;
-      gap: 28px;
+      gap: 20px;
     }
 
     .menu-header {
@@ -51,15 +51,15 @@
     }
 
     .menu-title {
-      font-size: 36px;
+      font-size: 34px;
       font-weight: 900;
       color: #FF4757;
       text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(0,0,0,0.08);
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
 
     .menu-subtitle {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
       color: #555;
     }
@@ -67,20 +67,20 @@
     .menu-cards {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 14px;
       width: 100%;
       max-width: 360px;
     }
 
     .category-card {
       background: #fff;
-      border-radius: 30px;
-      padding: 24px 20px;
+      border-radius: 26px;
+      padding: 16px 18px;
       display: flex;
       align-items: center;
-      gap: 20px;
-      box-shadow: 0 12px 25px rgba(0,0,0,0.1);
-      border: 6px solid #fff;
+      gap: 16px;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.1);
+      border: 5px solid #fff;
       cursor: pointer;
       transition: transform 0.15s;
     }
@@ -99,12 +99,17 @@
       color: white;
     }
 
+    .card-trace {
+      background: linear-gradient(135deg, #A55EEA 0%, #FF6B81 100%);
+      color: white;
+    }
+
     .category-icon {
-      font-size: 54px;
+      font-size: 42px;
       background: rgba(255,255,255,0.25);
-      width: 85px;
-      height: 85px;
-      border-radius: 22px;
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -113,18 +118,18 @@
     }
 
     .category-info h2 {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 900;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .category-info p {
-      font-size: 15px;
-      opacity: 0.9;
+      font-size: 14px;
+      opacity: 0.92;
       font-weight: 600;
     }
 
-    /* ==================== MÀN HÌNH CHƠI GAME ==================== */
+    /* ==================== THANH ĐIỀU KHIỂN CHUNG ==================== */
     .top-bar {
       width: 100%;
       max-width: 600px;
@@ -136,7 +141,7 @@
     }
 
     .pill-btn {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.92);
       border: 2px solid #fff;
       border-radius: 20px;
       padding: 8px 12px;
@@ -162,6 +167,7 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
+    /* ==================== MÀN HÌNH ĐỌC & TÔ ==================== */
     .card-container {
       flex: 1;
       display: flex;
@@ -187,7 +193,7 @@
     }
 
     .display-card.pop {
-      transform: scale(1.15) rotate(3deg);
+      transform: scale(1.12) rotate(2deg);
     }
 
     #target-char {
@@ -207,13 +213,58 @@
       letter-spacing: 1px;
     }
 
+    /* Bảng vẽ tô số */
+    .trace-board {
+      background: #ffffff;
+      width: 280px;
+      height: 280px;
+      border-radius: 40px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+      border: 8px solid #fff;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .trace-board.pop {
+      transform: scale(1.1);
+    }
+
+    #trace-canvas {
+      width: 100%;
+      height: 100%;
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    .progress-bar-wrap {
+      width: 220px;
+      height: 14px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 10px;
+      margin-top: 12px;
+      overflow: hidden;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    #trace-progress {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #FF9F43, #2ED573);
+      transition: width 0.1s;
+    }
+
     .feedback-box {
-      margin-top: 22px;
+      margin-top: 16px;
       min-height: 44px;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 10px 22px;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 10px 20px;
       border-radius: 25px;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 600;
       color: #444;
       text-align: center;
@@ -227,7 +278,7 @@
       justify-content: center;
       align-items: center;
       gap: 24px;
-      padding-bottom: 12px;
+      padding-bottom: 10px;
       z-index: 10;
     }
 
@@ -245,14 +296,18 @@
       cursor: pointer;
     }
 
+    .action-btn:active {
+      transform: scale(0.92);
+    }
+
     .mic-btn {
-      width: 92px;
-      height: 92px;
+      width: 88px;
+      height: 88px;
       border-radius: 50%;
       border: 6px solid #fff;
       background: #FF5E7E;
       color: white;
-      font-size: 40px;
+      font-size: 38px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -299,26 +354,34 @@
       <div class="category-card card-num" onclick="startGame('numbers')">
         <div class="category-icon">123</div>
         <div class="category-info">
-          <h2>Học Số</h2>
-          <p>Đọc các con số từ 0 đến 10</p>
+          <h2>Học Đọc Số</h2>
+          <p>Tập đọc các số từ 0 đến 10</p>
         </div>
       </div>
 
       <div class="category-card card-let" onclick="startGame('letters')">
         <div class="category-icon">ABC</div>
         <div class="category-info">
-          <h2>Học Chữ</h2>
-          <p>Đọc bảng chữ cái A, B, C</p>
+          <h2>Học Đọc Chữ</h2>
+          <p>Tập đọc bảng chữ cái A, B, C</p>
+        </div>
+      </div>
+
+      <div class="category-card card-trace" onclick="startGame('trace')">
+        <div class="category-icon">🎨</div>
+        <div class="category-info">
+          <h2>Tập Tô Số</h2>
+          <p>Dùng tay tô màu theo nét số</p>
         </div>
       </div>
     </div>
 
-    <button class="pill-btn" id="menu-lang-btn" onclick="toggleLang()" style="padding: 10px 20px; font-size: 16px;">
+    <button class="pill-btn" id="menu-lang-btn" onclick="toggleLang()" style="padding: 10px 20px; font-size: 15px;">
       Ngôn ngữ: 🇻🇳 Tiếng Việt
     </button>
   </div>
 
-  <!-- ==================== 2. MÀN HÌNH HỌC (SỐ / CHỮ) ==================== -->
+  <!-- ==================== 2. MÀN HÌNH CHƠI (ĐỌC & TÔ) ==================== -->
   <div id="game-screen" class="screen hidden">
     <div class="top-bar">
       <button class="pill-btn" onclick="goHome()">🏠 Menu</button>
@@ -328,16 +391,31 @@
     </div>
 
     <div class="card-container">
+      <!-- Khung hiển thị khi ở chế độ Đọc Số / Chữ -->
       <div class="display-card" id="display-card">
         <div id="target-char">0</div>
         <div id="char-word">KHÔNG</div>
       </div>
+
+      <!-- Khung hiển thị khi ở chế độ Tập Tô Số -->
+      <div id="trace-wrapper" class="hidden" style="display:flex; flex-direction:column; align-items:center;">
+        <div class="trace-board" id="trace-board">
+          <canvas id="trace-canvas" width="264" height="264"></canvas>
+        </div>
+        <div class="progress-bar-wrap">
+          <div id="trace-progress"></div>
+        </div>
+      </div>
+
       <div class="feedback-box" id="feedback">Bấm Micro và đọc to nhé!</div>
     </div>
 
     <div class="controls">
       <button class="action-btn" onclick="speakCurrentItem()" title="Nghe đọc mẫu">🔊</button>
+      <!-- Nút Mic (hiện khi học đọc) -->
       <button class="mic-btn" id="mic-btn" onclick="toggleListening()" title="Bấm để nói">🎤</button>
+      <!-- Nút Xóa tô lại (hiện khi tập tô) -->
+      <button class="mic-btn hidden" id="clear-trace-btn" onclick="resetTraceCanvas()" style="background:#FF9F43; box-shadow: 0 10px 25px rgba(255,159,67,0.4);" title="Tô lại">🔄</button>
       <button class="action-btn" onclick="nextItem(false)" title="Tiếp theo">⏭️</button>
     </div>
   </div>
@@ -358,7 +436,7 @@
       { char: "10", vi: ["mười", "số mười", "10"], en: ["ten", "10"], labelVi: "MƯỜI", labelEn: "TEN" }
     ];
 
-    // ==================== DỮ LIỆU CHỮ CÁI TIẾNG VIỆT (29 CHỮ) ====================
+    // ==================== DỮ LIỆU CHỮ CÁI TIẾNG VIỆT ====================
     const LETTERS_VI = [
       { char: "A", accept: ["a", "chữ a", "ha"], label: "A", speak: "a" },
       { char: "Ă", accept: ["ă", "á", "chữ á", "chữ ă"], label: "Á", speak: "á" },
@@ -391,7 +469,7 @@
       { char: "Y", accept: ["y", "i dài", "y dài", "i", "chữ y"], label: "Y (DÀI)", speak: "y dài" }
     ];
 
-    // ==================== DỮ LIỆU CHỮ CÁI TIẾNG ANH (A - Z) ====================
+    // ==================== DỮ LIỆU CHỮ CÁI TIẾNG ANH ====================
     const LETTERS_EN = [
       { char: "A", accept: ["a", "ay", "hey"], label: "AY", speak: "a" },
       { char: "B", accept: ["b", "bee", "be"], label: "BEE", speak: "b" },
@@ -423,37 +501,63 @@
 
     const COLORS = ["#FF5E7E", "#FF9F43", "#2ED573", "#1E90FF", "#A55EEA", "#FF4757", "#00D2D3"];
 
-    let currentCategory = 'numbers'; // 'numbers' hoặc 'letters'
-    let currentLang = 'vi';          // 'vi' hoặc 'en'
-    let isRandomOrder = false;       // false: Tuần tự, true: Ngẫu nhiên
+    let currentCategory = 'numbers'; // 'numbers' | 'letters' | 'trace'
+    let currentLang = 'vi';
+    let isRandomOrder = false;
     let currentIndex = 0;
     let score = 0;
     let isListening = false;
     let autoContinue = false;
 
     function getActiveList() {
-      if (currentCategory === 'numbers') return NUMBERS_DATA;
+      if (currentCategory === 'numbers' || currentCategory === 'trace') return NUMBERS_DATA;
       return currentLang === 'vi' ? LETTERS_VI : LETTERS_EN;
     }
 
+    // ==================== CHUYỂN MÀN HÌNH ====================
     function startGame(category) {
       currentCategory = category;
-      currentIndex = 0; // Bắt đầu từ số 0 (hoặc chữ A)
+      currentIndex = 0;
+      stopMicrophone();
+
       document.getElementById('menu-screen').classList.add('hidden');
       document.getElementById('game-screen').classList.remove('hidden');
+
+      if (category === 'trace') {
+        document.getElementById('display-card').classList.add('hidden');
+        document.getElementById('trace-wrapper').classList.remove('hidden');
+        document.getElementById('mic-btn').classList.add('hidden');
+        document.getElementById('clear-trace-btn').classList.remove('hidden');
+        updateFeedback(currentLang === 'vi' ? "Dùng ngón tay tô kín nét số nhé!" : "Trace the number with your finger!");
+      } else {
+        document.getElementById('display-card').classList.remove('hidden');
+        document.getElementById('trace-wrapper').classList.add('hidden');
+        document.getElementById('mic-btn').classList.remove('hidden');
+        document.getElementById('clear-trace-btn').classList.add('hidden');
+        updateFeedback(currentLang === 'vi' ? "Bấm Micro và đọc to nhé!" : "Tap Mic and read aloud!");
+      }
+
       renderCard();
-      updateFeedback(currentLang === 'vi' ? "Bấm Micro và đọc to nhé!" : "Tap Mic and read aloud!");
     }
 
     function goHome() {
-      autoContinue = false;
-      if (recognition && isListening) {
-        recognition.stop();
-      }
+      stopMicrophone();
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
       document.getElementById('game-screen').classList.add('hidden');
       document.getElementById('menu-screen').classList.remove('hidden');
     }
 
+    // Hàm tắt hoàn toàn Micro (dùng khi bấm Loa hoặc thoát ra Menu)
+    function stopMicrophone() {
+      autoContinue = false;
+      if (recognition && isListening) {
+        try { recognition.stop(); } catch (e) {}
+      }
+      isListening = false;
+      document.getElementById('mic-btn').classList.remove('listening');
+    }
+
+    // ==================== NHẬN DIỆN GIỌNG NÓI ====================
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     let recognition = null;
 
@@ -478,7 +582,7 @@
 
         if (checkAnswer(transcript)) {
           recognition.stop();
-          handleCorrectAnswer();
+          handleCorrectAnswer(true);
         }
       };
 
@@ -494,7 +598,7 @@
       recognition.onend = () => {
         isListening = false;
         document.getElementById('mic-btn').classList.remove('listening');
-        if (autoContinue) {
+        if (autoContinue && currentCategory !== 'trace') {
           setTimeout(() => {
             if (!isListening && autoContinue) {
               try { recognition.start(); } catch(e) {}
@@ -517,12 +621,15 @@
       });
     }
 
-    function handleCorrectAnswer() {
+    function handleCorrectAnswer(restartMicAfter) {
       autoContinue = false;
       score += 10;
       document.getElementById('score').innerText = score;
 
-      const card = document.getElementById('display-card');
+      const card = currentCategory === 'trace'
+        ? document.getElementById('trace-board')
+        : document.getElementById('display-card');
+
       card.classList.add('pop');
       playSuccessSound();
       fireConfetti();
@@ -532,8 +639,10 @@
       setTimeout(() => {
         card.classList.remove('pop');
         nextItem(true);
-        autoContinue = true;
-        try { recognition.start(); } catch(e) {}
+        if (restartMicAfter && currentCategory !== 'trace') {
+          autoContinue = true;
+          try { recognition.start(); } catch(e) {}
+        }
       }, 1500);
     }
 
@@ -548,7 +657,11 @@
       }
       renderCard();
       if (!fromCorrect) {
-        updateFeedback(currentLang === 'vi' ? "Bé đọc thẻ mới này nhé!" : "Read this one!");
+        if (currentCategory === 'trace') {
+          updateFeedback(currentLang === 'vi' ? "Bé tô số mới này nhé!" : "Trace this number!");
+        } else {
+          updateFeedback(currentLang === 'vi' ? "Bé đọc thẻ mới này nhé!" : "Read this one!");
+        }
       }
     }
 
@@ -557,16 +670,20 @@
       if (currentIndex >= list.length) currentIndex = 0;
       const item = list[currentIndex];
 
-      const charEl = document.getElementById('target-char');
-      const wordEl = document.getElementById('char-word');
-
-      charEl.innerText = item.char;
-      charEl.style.color = COLORS[currentIndex % COLORS.length];
-
-      if (currentCategory === 'numbers') {
-        wordEl.innerText = currentLang === 'vi' ? item.labelVi : item.labelEn;
+      if (currentCategory === 'trace') {
+        setupTraceNumber(item.char, COLORS[currentIndex % COLORS.length]);
       } else {
-        wordEl.innerText = item.label;
+        const charEl = document.getElementById('target-char');
+        const wordEl = document.getElementById('char-word');
+
+        charEl.innerText = item.char;
+        charEl.style.color = COLORS[currentIndex % COLORS.length];
+
+        if (currentCategory === 'numbers') {
+          wordEl.innerText = currentLang === 'vi' ? item.labelVi : item.labelEn;
+        } else {
+          wordEl.innerText = item.label;
+        }
       }
     }
 
@@ -576,42 +693,32 @@
         return;
       }
       if (isListening) {
-        autoContinue = false;
-        recognition.stop();
-        updateFeedback(currentLang === 'vi' ? "Đã tạm dừng Micro" : "Mic paused");
+        stopMicrophone();
+        updateFeedback(currentLang === 'vi' ? "Đã tắt Micro. Bấm 🎤 để bật lại." : "Mic off. Tap 🎤 to start.");
       } else {
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
         autoContinue = true;
         recognition.lang = currentLang === 'vi' ? 'vi-VN' : 'en-US';
         try { recognition.start(); } catch(e) {}
       }
     }
 
-    function toggleLang() {
-      currentLang = currentLang === 'vi' ? 'en' : 'vi';
-      const label = currentLang === 'vi' ? '🇻🇳 Tiếng Việt' : '🇺🇸 English';
-      document.getElementById('lang-btn').innerText = label;
-      document.getElementById('menu-lang-btn').innerText = "Ngôn ngữ: " + label;
-      currentIndex = 0;
-      renderCard();
-      if (recognition) {
-        recognition.lang = currentLang === 'vi' ? 'vi-VN' : 'en-US';
-        if (isListening) recognition.stop();
-      }
-    }
-
-    function toggleOrderMode() {
-      isRandomOrder = !isRandomOrder;
-      document.getElementById('mode-btn').innerText = isRandomOrder ? "Ngẫu nhiên" : "Tuần tự";
-    }
-
+    // YÊU CẦU 1: Khi bật phát âm (🔊) thì ghi âm tự động tắt hẳn, muốn ghi âm lại thì bấm lại nút Mic
     function speakCurrentItem() {
+      const wasListening = isListening || autoContinue;
+      stopMicrophone();
+
+      if (currentCategory !== 'trace' && wasListening) {
+        updateFeedback(currentLang === 'vi' ? "🔊 Đang đọc mẫu (Bấm 🎤 để đọc lại)" : "🔊 Speaking (Tap 🎤 to speak)");
+      }
+
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const list = getActiveList();
         const item = list[currentIndex];
         let textToSpeak = "";
 
-        if (currentCategory === 'numbers') {
+        if (currentCategory === 'numbers' || currentCategory === 'trace') {
           textToSpeak = currentLang === 'vi' ? item.labelVi.toLowerCase() : item.labelEn.toLowerCase();
         } else {
           textToSpeak = item.speak;
@@ -624,10 +731,215 @@
       }
     }
 
+    function toggleLang() {
+      currentLang = currentLang === 'vi' ? 'en' : 'vi';
+      const label = currentLang === 'vi' ? '🇻🇳 Tiếng Việt' : '🇺🇸 English';
+      document.getElementById('lang-btn').innerText = label;
+      document.getElementById('menu-lang-btn').innerText = "Ngôn ngữ: " + label;
+      currentIndex = 0;
+      stopMicrophone();
+      renderCard();
+      if (recognition) {
+        recognition.lang = currentLang === 'vi' ? 'vi-VN' : 'en-US';
+      }
+    }
+
+    function toggleOrderMode() {
+      isRandomOrder = !isRandomOrder;
+      document.getElementById('mode-btn').innerText = isRandomOrder ? "Ngẫu nhiên" : "Tuần tự";
+    }
+
     function updateFeedback(text) {
       document.getElementById('feedback').innerText = text;
     }
 
+    // ==================== YÊU CẦU 2: LOGIC TẬP TÔ SỐ (TRACING) ====================
+    const traceCanvas = document.getElementById('trace-canvas');
+    const tCtx = traceCanvas.getContext('2d', { willReadFrequently: true });
+
+    // Tạo 2 canvas ẩn để làm khuôn chấm điểm và lưu nét vẽ của bé
+    const maskCanvas = document.createElement('canvas');
+    maskCanvas.width = 264;
+    maskCanvas.height = 264;
+    const mCtx = maskCanvas.getContext('2d', { willReadFrequently: true });
+
+    const drawCanvas = document.createElement('canvas');
+    drawCanvas.width = 264;
+    drawCanvas.height = 264;
+    const dCtx = drawCanvas.getContext('2d', { willReadFrequently: true });
+
+    let isDrawing = false;
+    let traceCompleted = false;
+    let currentBrushColor = "#FF5E7E";
+    let targetMaskIndices = [];
+    let lastPt = null;
+
+    function setupTraceNumber(numStr, color) {
+      currentBrushColor = color;
+      traceCompleted = false;
+      document.getElementById('trace-progress').style.width = '0%';
+
+      const w = traceCanvas.width;
+      const h = traceCanvas.height;
+
+      mCtx.clearRect(0, 0, w, h);
+      dCtx.clearRect(0, 0, w, h);
+
+      // Cỡ chữ nhỏ hơn một chút nếu là số "10" có 2 chữ số
+      const fontSize = numStr.length > 1 ? 165 : 210;
+      const fontSpec = `900 ${fontSize}px "Segoe UI", Arial, sans-serif`;
+
+      mCtx.font = fontSpec;
+      mCtx.textAlign = 'center';
+      mCtx.textBaseline = 'middle';
+      mCtx.fillStyle = '#000000';
+      mCtx.fillText(numStr, w / 2, h / 2 + 8);
+
+      // Lấy danh sách các điểm ảnh thuộc về con số để chấm phần trăm hoàn thành
+      const imgData = mCtx.getImageData(0, 0, w, h).data;
+      targetMaskIndices = [];
+      for (let i = 3; i < imgData.length; i += 16) { // Lấy mẫu cách quãng để mượt trên điện thoại
+        if (imgData[i] > 128) {
+          targetMaskIndices.push(i);
+        }
+      }
+
+      renderTraceComposite(numStr, fontSpec);
+    }
+
+    function resetTraceCanvas() {
+      const list = getActiveList();
+      const item = list[currentIndex];
+      setupTraceNumber(item.char, COLORS[currentIndex % COLORS.length]);
+      updateFeedback(currentLang === 'vi' ? "Đã xóa! Bé tô lại số này nhé!" : "Cleared! Trace again!");
+    }
+
+    function renderTraceComposite(numStr, fontSpec) {
+      const w = traceCanvas.width;
+      const h = traceCanvas.height;
+      tCtx.clearRect(0, 0, w, h);
+
+      // 1. Vẽ nền con số màu xám nhạt làm khuôn
+      tCtx.font = fontSpec;
+      tCtx.textAlign = 'center';
+      tCtx.textBaseline = 'middle';
+      tCtx.fillStyle = '#E8ECEF';
+      tCtx.fillText(numStr, w / 2, h / 2 + 8);
+
+      // 2. Chỉ hiển thị màu bút của bé nằm gọn bên trong lòng con số (cực đẹp và sạch)
+      tCtx.save();
+      tCtx.drawImage(maskCanvas, 0, 0);
+      tCtx.globalCompositeOperation = 'source-in';
+      tCtx.drawImage(drawCanvas, 0, 0);
+      tCtx.restore();
+
+      // 3. Vẽ thêm nét mờ nơi ngón tay bé vừa đi qua bên ngoài để bé dễ nhìn vị trí tay
+      tCtx.save();
+      tCtx.globalAlpha = 0.25;
+      tCtx.drawImage(drawCanvas, 0, 0);
+      tCtx.restore();
+
+      // 4. Vẽ đường viền nét đứt xung quanh số để dẫn hướng
+      tCtx.save();
+      tCtx.font = fontSpec;
+      tCtx.textAlign = 'center';
+      tCtx.textBaseline = 'middle';
+      tCtx.strokeStyle = '#CED4DA';
+      tCtx.lineWidth = 3;
+      tCtx.setLineDash([8, 6]);
+      tCtx.strokeText(numStr, w / 2, h / 2 + 8);
+      tCtx.restore();
+    }
+
+    function getPointerPos(e) {
+      const rect = traceCanvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: (clientX - rect.left) * (traceCanvas.width / rect.width),
+        y: (clientY - rect.top) * (traceCanvas.height / rect.height)
+      };
+    }
+
+    function startDraw(e) {
+      if (currentCategory !== 'trace' || traceCompleted) return;
+      isDrawing = true;
+      lastPt = getPointerPos(e);
+      drawStroke(lastPt);
+    }
+
+    function moveDraw(e) {
+      if (!isDrawing || currentCategory !== 'trace' || traceCompleted) return;
+      e.preventDefault();
+      const pt = getPointerPos(e);
+      drawStroke(pt);
+      lastPt = pt;
+    }
+
+    function endDraw() {
+      if (!isDrawing) return;
+      isDrawing = false;
+      lastPt = null;
+      checkTraceProgress();
+    }
+
+    function drawStroke(pt) {
+      dCtx.lineCap = 'round';
+      dCtx.lineJoin = 'round';
+      dCtx.strokeStyle = currentBrushColor;
+      dCtx.lineWidth = 42; // Đầu bút to cho ngón tay trẻ nhỏ dễ tô
+
+      dCtx.beginPath();
+      if (lastPt) {
+        dCtx.moveTo(lastPt.x, lastPt.y);
+        dCtx.lineTo(pt.x, pt.y);
+      } else {
+        dCtx.moveTo(pt.x, pt.y);
+        dCtx.lineTo(pt.x + 0.1, pt.y + 0.1);
+      }
+      dCtx.stroke();
+
+      const item = getActiveList()[currentIndex];
+      const fontSize = item.char.length > 1 ? 165 : 210;
+      const fontSpec = `900 ${fontSize}px "Segoe UI", Arial, sans-serif`;
+      renderTraceComposite(item.char, fontSpec);
+    }
+
+    function checkTraceProgress() {
+      if (traceCompleted || targetMaskIndices.length === 0) return;
+
+      const drawData = dCtx.getImageData(0, 0, drawCanvas.width, drawCanvas.height).data;
+      let filledCount = 0;
+
+      for (let i = 0; i < targetMaskIndices.length; i++) {
+        if (drawData[targetMaskIndices[i]] > 50) {
+          filledCount++;
+        }
+      }
+
+      // Quy đổi sang thang 100% (chỉ cần bé tô phủ được 78% diện tích nét số là đạt 100%)
+      const rawRatio = filledCount / targetMaskIndices.length;
+      const percent = Math.min(100, Math.round((rawRatio / 0.78) * 100));
+      document.getElementById('trace-progress').style.width = percent + '%';
+
+      if (percent >= 100) {
+        traceCompleted = true;
+        speakCurrentItem(); // Đọc vang tên số khi bé tô xong
+        handleCorrectAnswer(false);
+      } else if (percent > 30) {
+        updateFeedback(currentLang === 'vi' ? `Đạt ${percent}% rồi, tô nốt phần còn trống nhé!` : `${percent}% done, keep going!`);
+      }
+    }
+
+    traceCanvas.addEventListener('mousedown', startDraw);
+    traceCanvas.addEventListener('mousemove', moveDraw);
+    window.addEventListener('mouseup', endDraw);
+
+    traceCanvas.addEventListener('touchstart', startDraw, { passive: false });
+    traceCanvas.addEventListener('touchmove', moveDraw, { passive: false });
+    window.addEventListener('touchend', endDraw);
+
+    // ==================== ÂM THANH & PHÁO GIẤY ====================
     function playSuccessSound() {
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
       const notes = [523.25, 659.25, 783.99, 1046.50];
